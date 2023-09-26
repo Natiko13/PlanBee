@@ -12,7 +12,7 @@
           <label class="email-holder">
             <input
               class="email-input"
-              [ngStyle]="{ 'border-color': errorInfo ? '#d0312d' : '' }"
+              [ngStyle]="{ 'border-color': borderColor }"
               type="email"
               name="email"
               id="email"
@@ -21,6 +21,7 @@
               [pattern]="'^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'"
               required
             />
+
             <span
               class="fake-placeholder"
               [ngClass]="{ active: emailValue }"

@@ -55,6 +55,10 @@
   color: #fff;
 }
 
+.active .material-symbols-rounded {
+  color: #fff;
+}
+
 .settings-data {
   padding: 10px 24px;
 }

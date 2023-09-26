@@ -89,6 +89,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
+  get borderColor(): string {
+    return this.emailValue
+      ? 'var(--yellow40)'
+      : this.errorInfo
+      ? '#d0312d'
+      : '';
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

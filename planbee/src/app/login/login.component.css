@@ -46,13 +46,19 @@ label input {
   border-radius: 4px;
 }
 
-label input:focus {
-  border: 1px solid var(--yellow40);
+label input:focus,
+label .active ~ input {
+  border: 1px solid var(--yellow40) !important;
 }
 
 label input:focus ~ span,
 .active {
   transform: translate(0.25rem, -100%) scale(0.9);
+  color: var(--yellow40);
+}
+
+label input:focus ~ span .material-symbols-outlined,
+.active .material-symbols-outlined {
   color: var(--yellow40);
 }
 
@@ -94,7 +100,11 @@ label input:focus ~ span,
   cursor: pointer !important;
 }
 
-label input.ng-invalid.ng-touched + .fake-placeholder {
+label input.ng-invalid.ng-touched + .fake-placeholder,
+label
+  input.ng-invalid.ng-touched
+  + .fake-placeholder
+  .material-symbols-outlined {
   color: var(--red-30) !important;
 }
 
@@ -105,7 +115,7 @@ label input.ng-invalid.ng-touched + .fake-placeholder {
   height: 42px;
   margin-top: 24px;
   background-color: var(--yellow50);
-  color: #fff;
+  color: var(--gray0);
   font-size: 16px;
   border-radius: 100px;
   cursor: pointer;

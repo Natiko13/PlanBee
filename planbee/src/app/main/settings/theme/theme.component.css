@@ -78,6 +78,14 @@
   object-fit: cover;
 }
 
+.light {
+  background-image: url("/assets/theme/Light.png");
+}
+
+.dark {
+  background-image: url("/assets/theme/Dark.png");
+}
+
 .current-avatar-img {
   margin-left: 16px;
   cursor: pointer;
