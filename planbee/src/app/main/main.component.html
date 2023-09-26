@@ -1,0 +1,24 @@
+<div class="app-container">
+  <div class="aside" [ngClass]="{ 'hide-aside': isHide }">
+    <app-aside
+      [isHide]="isHide"
+      (onHideNav)="onHideNav()"
+      (onActiveSettings)="onActiveSettings()"
+      (onActiveGroup)="onActiveGroup()"
+    ></app-aside>
+  </div>
+  <main class="main" [ngClass]="{ 'main-resize': isHide }">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-settings
+    [@openClose]="isOpenSettings ? 'open' : 'closed'"
+    (@openClose.done)="onAnimationEvent($event)"
+    (isSettingsActive)="onActiveSettings()"
+  ></app-settings>
+  <app-group-popup
+    [@openClose]="isOpenGroup ? 'open' : 'closed'"
+    (@openClose.done)="onAnimationEvent($event)"
+    (isGroupActive)="onActiveGroup()"
+  ></app-group-popup>
+</div>

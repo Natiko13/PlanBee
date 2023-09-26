@@ -1,0 +1,49 @@
+.confiramtion {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 400px;
+  padding: 16px;
+  background-color: var(--orange-100);
+  border: 1px solid var(--orange-80);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.confiramtion .material-symbols-rounded {
+  color: var(--orange-50);
+  font-size: 24px;
+}
+
+.confiramtion p {
+  font-size: 14px;
+  color: var(--gray-10);
+}
+
+.description {
+  font-size: 16px !important;
+  font-weight: 600;
+}
+
+.confiramtion input[type="button"] {
+  width: 161px;
+  height: 42px;
+  background-color: var(--yellow50);
+  color: var(--gray0);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.confiramtion.succes {
+  opacity: 1;
+}
+
+.confiramtion.error {
+  opacity: 1;
+  border: 1px solid var(--red-80) !important;
+  background-color: var(--red-100) !important;
+}

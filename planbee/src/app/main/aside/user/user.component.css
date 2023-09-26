@@ -1,0 +1,55 @@
+.container {
+  position: absolute;
+  top: 50px;
+  left: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  padding: 16px;
+  background-color: var(--gray0);
+  border: 1px solid var(--gray80);
+  border-radius: 8px;
+  z-index: 999;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.user-data {
+  display: flex;
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 100px;
+  background-color: rgb(131, 130, 130);
+}
+
+.user-details {
+  margin-left: 8px;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.email {
+  font-size: 12px;
+}
+
+.settings,
+.logout {
+  display: flex;
+  align-items: center;
+  padding: 13px 0;
+  border-top: 1px solid var(--gray-80);
+  cursor: pointer;
+}
+
+.material-symbols-rounded {
+  margin-right: 4px;
+}

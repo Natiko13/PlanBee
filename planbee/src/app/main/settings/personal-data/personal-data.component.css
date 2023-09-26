@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.form label {
+  position: relative;
+}
+
+.form label span {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  padding: 0 5px;
+  background: linear-gradient(180deg, var(--gray100) 50%, var(--gray0) 50%);
+  color: var(--gray40);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form label input {
+  width: 300px;
+  height: 42px;
+  background-color: var(--gray0);
+  border: 1px solid var(--gray80);
+  padding: 0 8px;
+  border-radius: 4px;
+}
+
+.form input[type="submit"] {
+  padding: 12px 0;
+  border-radius: 100px;
+  background-color: var(--yellow50);
+  color: var(--gray0);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form input[type="submit"].disabled {
+  background-color: var(--gray60);
+  cursor: not-allowed;
+}

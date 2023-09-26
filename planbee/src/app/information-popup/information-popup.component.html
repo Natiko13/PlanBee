@@ -1,0 +1,30 @@
+<div
+  class="confiramtion"
+  [ngStyle]="{
+    top: isPopupTop ? '20px' : '',
+    bottom: isPopupTop ? '' : '10px'
+  }"
+  [ngClass]="{
+    succes: isActiveConfirmationPopup,
+    error: isError && isActiveConfirmationPopup
+  }"
+>
+  <span
+    class="material-symbols-rounded"
+    [ngStyle]="{ color: isError ? '#E21A1A' : '' }"
+  >
+    info
+  </span>
+  <div class="info">
+    <p class="description">{{ isError ? "Uwaga" : "Informacja" }}</p>
+    <p>
+      {{ alertInfo }}
+    </p>
+  </div>
+  <input
+    *ngIf="isDelete"
+    type="button"
+    value="Cofnij"
+    (click)="onRestoreNote()"
+  />
+</div>

@@ -1,0 +1,22 @@
+<div class="background" [ngClass]="background">
+  <div class="settings-holder">
+    <button class="bgc-settings-btn" (click)="onActiveBgSetting()">
+      <span class="material-symbols-outlined"> photo_library </span>
+      <span>Dostosuj</span>
+    </button>
+    <div
+      class="image-container"
+      [@openClose]="isOpenBackgroundSetting ? 'open' : 'closed'"
+    >
+      <img
+        *ngFor="let bg of bgArray"
+        (click)="patchBackground(bg)"
+        src="/assets/header-img/{{ bg }}"
+        alt="{{ bg }}"
+        class="bgi"
+        [ngClass]="{ 'current-bgi': bg === bgi }"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>

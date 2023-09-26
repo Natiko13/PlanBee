@@ -1,0 +1,22 @@
+<div class="container">
+  <h3>Konto</h3>
+  <div class="user-data">
+    <img
+      *ngIf="userData?.profileOptions?.avatar"
+      class="user-avatar"
+      src="/assets/Avatars/{{ userData.profileOptions.avatar }}"
+      alt="userData.profileOptions.avatar"
+    />
+    <div class="user-details">
+      <p class="name">{{ userData.name }}</p>
+      <p class="email">{{ userData.email }}</p>
+    </div>
+  </div>
+  <div class="settings" (click)="settings(); onCloseUserDetails()">
+    <span class="material-symbols-rounded"> settings </span>
+    <span>Ustawienia</span>
+  </div>
+  <div class="logout" (click)="onLogout()">
+    <span class="material-symbols-rounded"> logout </span><span>Wyloguj</span>
+  </div>
+</div>

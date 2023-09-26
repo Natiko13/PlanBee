@@ -1,0 +1,165 @@
+<div class="register-background">
+  <div class="register-container">
+    <mat-spinner *ngIf="processing"></mat-spinner>
+    <div class="executed" *ngIf="done">
+      <p class="success"></p>
+      <p>Pomyślnie zarejestrowano</p>
+    </div>
+    <ng-container *ngIf="!processing && !done">
+      <h2>Rejestracja</h2>
+      <form [formGroup]="registerGroup" (ngSubmit)="onRegister()">
+        <div class="form-controll">
+          <div class="names">
+            <label class="holder">
+              <input
+                class="name"
+                id="name"
+                type="text"
+                name="name"
+                formControlName="name"
+                placeholder=" "
+              />
+              <span
+                class="fake-placeholder"
+                [ngClass]="{ active: registerGroup.get('name')!.value }"
+              >
+                Imię
+              </span>
+            </label>
+            <label class="holder">
+              <input
+                class="surname"
+                id="surname"
+                type="text"
+                name="surname"
+                formControlName="surname"
+                placeholder=" "
+              />
+              <span
+                class="fake-placeholder"
+                [ngClass]="{ active: registerGroup.get('surname')!.value }"
+              >
+                Nazwisko
+              </span>
+            </label>
+          </div>
+          <label class="holder">
+            <input
+              class="email"
+              id="email"
+              [ngClass]="{ 'invalid-field': errorInfo }"
+              type="email"
+              name="email"
+              formControlName="email"
+              placeholder=" "
+            />
+            <span
+              class="fake-placeholder"
+              [ngClass]="{
+                active: registerGroup.get('email')!.value
+              }"
+              [ngStyle]="{ color: errorInfo ? '#d0312d' : '' }"
+            >
+              E-mail
+            </span>
+          </label>
+          <label class="holder">
+            <input
+              class="password"
+              [ngClass]="{ 'invalid-field': !passwordMatch }"
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              formControlName="password"
+              placeholder=" "
+            />
+            <span
+              class="fake-placeholder active"
+              [ngStyle]="{ color: passwordMatch ? '' : '#d0312d' }"
+              [ngClass]="{ active: registerGroup.get('password')!.value }"
+            >
+              Hasło
+            </span>
+            <span
+              class="material-symbols-outlined show-password"
+              style="transform: translate(0, -50%) scale(1) !important"
+              (click)="onToggleShowPassword()"
+            >
+              visibility{{ showPassword ? "" : "_off" }}
+            </span>
+          </label>
+          <p
+            class="password-info"
+            [ngStyle]="{ color: passwordMatch ? '' : '#d0312d' }"
+          >
+            {{
+              passwordMatch
+                ? "Hasło musi zawierać co najmniej 8 znaków, w tym cyfrę, małą i
+            wielką literę oraz znak specjalny."
+                : "Hasła nie pasują do siebie"
+            }}
+          </p>
+          <label class="holder">
+            <input
+              class="repeated-password"
+              [ngClass]="{ 'invalid-field': !passwordMatch }"
+              [type]="showPassword ? 'text' : 'password'"
+              type="password"
+              formControlName="repeatedPassword"
+              placeholder=" "
+            />
+
+            <span
+              class="fake-placeholder"
+              [ngClass]="{
+                active: registerGroup.get('repeatedPassword')!.value
+              }"
+              [ngStyle]="{ color: passwordMatch ? '' : '#d0312d' }"
+            >
+              Powtórz hasło
+            </span>
+            <span
+              class="material-symbols-outlined show-password"
+              style="transform: translate(0, -50%) scale(1) !important"
+              (click)="onToggleShowPassword()"
+            >
+              visibility{{ showPassword ? "" : "_off" }}
+            </span>
+          </label>
+          <input
+            type="checkbox"
+            formControlName="privacyPolicy"
+            id="accept-terms"
+          />
+          <label class="checkbox-label" for="accept-terms"
+            >Oświadczam, że znam i akceptuję postanowienia
+            <a
+              href="/assets/REGULAMIN_APLIKACJI_WEBOWEJ_PLANBEE.pdf"
+              target="_blank"
+              >regulaminu</a
+            >
+            *</label
+          >
+        </div>
+        <button
+          class="form-btn"
+          type="submit"
+          [ngClass]="{ disabled: !registerGroup.valid || !passwordMatch }"
+          [disabled]="!registerGroup.valid || !passwordMatch"
+        >
+          Zarejestruj się
+        </button>
+      </form>
+      <span class="register-redirect" [routerLink]="['/login']"
+        >Masz już konto? <a>Zaloguj się</a></span
+      >
+    </ng-container>
+  </div>
+  <app-information-popup
+    [alertInfo]="errorInfo"
+    [isError]="isError"
+    [isActiveConfirmationPopup]="isActiveAlert"
+    [isPasswordMatch]="passwordMatch"
+    [isPopupTop]="isPopupTop"
+  ></app-information-popup>
+</div>

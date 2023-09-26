@@ -1,0 +1,73 @@
+.todo-template {
+  position: relative;
+  top: -53px;
+  min-height: 100svh;
+  padding: 16px;
+  margin: 0 12px;
+  background-color: var(--gray90);
+  border-radius: 8px;
+  border: 1px solid var(--gray80);
+}
+
+.todo-template h3 {
+  font-weight: 600;
+}
+
+.items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  width: 172px;
+  height: 184px;
+  padding: 10px 16px;
+  margin: 16px 0;
+  background-color: var(--gray100);
+  border-radius: 8px;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 2px 0px rgba(0, 0, 0, 0.09),
+    0px 4px 2px 0px rgba(0, 0, 0, 0.05), 0px 7px 3px 0px rgba(0, 0, 0, 0.01),
+    0px 11px 3px 0px rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+.add-new {
+  display: grid;
+  align-items: start;
+  background-color: var(--gray0);
+  text-align: center;
+  color: var(--yellow50);
+}
+
+.add-new .material-symbols-outlined {
+  justify-self: center;
+  width: 64px;
+  height: 64px;
+  color: var(--yellow50);
+  font-weight: 200;
+  font-size: 68px;
+}
+.add-new .title {
+  text-align: center;
+  color: var(--yellow50);
+}
+.title {
+  text-align: left;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  font-weight: 600;
+}
+.content {
+  color: var(--gray30);
+  font-size: 12px;
+  line-height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+  -webkit-box-orient: vertical;
+}

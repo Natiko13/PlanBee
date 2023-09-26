@@ -1,0 +1,205 @@
+.container {
+  display: flex;
+}
+
+.bin-con {
+  display: flex;
+  flex-direction: column;
+  min-width: 317px;
+  height: 60%;
+}
+
+.bin {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 317px;
+  height: 100svh;
+  padding: 16px 0;
+  background-color: var(--gray70);
+}
+
+.item:first-child {
+  border: none;
+}
+
+.item {
+  border-top: 1px solid var(--gray80);
+}
+
+.item-header,
+.item-title {
+  width: 100%;
+  height: 36px;
+}
+
+.item-header {
+  position: relative;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.item-category {
+  display: flex;
+  align-items: center;
+}
+
+.restore-all {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 19px;
+  transform: translateY(-50%) rotateY(180deg);
+  background-color: var(--gray80);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.item-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+
+.item-title > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.item-header:hover,
+.item-title:hover {
+  background-color: var(--yellow100);
+}
+
+.delete-forever {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 285px;
+  height: 42px;
+  background-color: var(--gray0);
+  border: 1px solid var(--yellow50);
+  border-radius: 100px;
+  color: var(--yellow50);
+  cursor: pointer;
+}
+
+.delete-forever .material-symbols-rounded {
+  color: var(--yellow50);
+}
+
+.restore-item {
+  width: 20px;
+  height: 20px;
+  font-size: 19px;
+  background-color: var(--gray80);
+  border-radius: 4px;
+  transform: rotateY(180deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.item-title:hover .restore-item,
+.item-header:hover .restore-all {
+  opacity: 1;
+}
+
+.spacer {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.deleted-content {
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.item-content {
+  height: 70%;
+  background: var(--gray100) url("/assets/background-image/bg-kosz.png")
+    no-repeat center / contain;
+}
+
+.tool-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 42px;
+  background-color: var(--gray90);
+}
+
+.tool-bar-restore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 132px;
+  height: 34px;
+  margin-right: 24px;
+  background-color: var(--yellow50);
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray0);
+  cursor: pointer;
+}
+
+.tool-bar-restore .material-symbols-rounded {
+  transform: rotateY(180deg);
+  font-weight: 600;
+}
+
+.item-content-value {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--gray0);
+  padding: 24px;
+}
+.item-content-title {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -2%;
+}
+
+.item-content-description {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: -2%;
+}
+
+.category-active {
+  background-color: var(--yellow90);
+}
+
+.item-active {
+  background-color: var(--yellow100);
+}
+
+hr {
+  border: 1px solid var(--gray20) !important ;
+}
+
+.tool-bar-restore .material-symbols-rounded {
+  color: var(--gray0);
+}
+
+.disabled {
+  background-color: var(--gray60) !important;
+  border: none !important;
+  color: var(--gray0) !important;
+  cursor: not-allowed;
+}

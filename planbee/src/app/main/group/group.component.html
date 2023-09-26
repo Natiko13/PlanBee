@@ -1,0 +1,179 @@
+<app-background></app-background>
+<div class="main-container">
+  <h1 class="group-name" *ngIf="!isChangingGroupName">
+    {{ groupName }}
+    <span class="material-symbols-rounded" (click)="toggleGroupNameInput()">
+      edit
+    </span>
+  </h1>
+  <input
+    #changingGroupNameInput
+    type="text"
+    class="change-group-name"
+    [value]="groupName"
+    [(ngModel)]="groupName"
+    *ngIf="isChangingGroupName"
+    (blur)="onBlur('groupName')"
+    (keyup.enter)="onBlur('groupName')"
+  />
+  <section class="container">
+    <div class="frames">
+      <div class="frame">
+        <span class="category"> Notatki </span>
+        <div class="items-con">
+          <div
+            class="add-new item"
+            [routerLink]="['/', 'group', groupName, groupId, 'notes', '']"
+          >
+            <span class="title">Utwórz nową notatkę</span>
+            <span class="material-symbols-rounded"> note_add </span>
+          </div>
+          <ng-container *ngIf="group.notes.length > 0">
+            <div
+              class="item"
+              *ngFor="let item of group.notes.reverse()"
+              [routerLink]="[
+                '/',
+                'group',
+                groupName,
+                groupId,
+                'notes',
+                item._id
+              ]"
+            >
+              <span class="title">{{ item.title }}</span>
+              <span class="content" [innerHtml]="item.content"> </span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="frame">
+        <span class="category"> Zadania </span>
+        <div class="items-con">
+          <div
+            class="add-new item"
+            [routerLink]="['/', 'group', groupName, groupId, 'tasks', '']"
+          >
+            <span class="title">Utwórz nowe zadanie</span>
+            <span class="material-symbols-rounded"> list_alt </span>
+          </div>
+          <ng-container *ngIf="group.tasks.length > 0">
+            <div
+              class="item"
+              *ngFor="let item of group.tasks.reverse()"
+              [routerLink]="[
+                '/',
+                'group',
+                groupName,
+                groupId,
+                'tasks',
+                item._id
+              ]"
+            >
+              <span class="title">{{ item.title }}</span>
+              <span class="content" [innerHtml]="item.content"></span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="users">
+      <div class="users-line">
+        <div class="users-line-d">
+          <span class="material-symbols-rounded"> groups </span>
+          <span>Członkowie</span>
+        </div>
+        <div class="settings">
+          <span
+            class="material-symbols-rounded"
+            [ngClass]="{active: toggleSettings}"
+            tabindex="0"
+            (click)="onToggleSettings()"
+          >
+            more_horiz
+          </span>
+          <div class="settings-options" *ngIf="toggleSettings">
+            <p (click)="onMenageGroupMembers()">Zarządzaj grupą</p>
+            <p (click)="onToggleGroupDeleteConfirmation()">Usuń grupę</p>
+          </div>
+        </div>
+      </div>
+      <span class="group-members-amount">{{ group.members.length }} osoby</span>
+      <hr />
+      <div
+        class="group-members"
+        *ngFor="let member of group.members; let i = index"
+      >
+        <div class="member">
+          <span class="material-symbols-rounded icon"> person </span>
+          <span class="user"
+            >{{ member === userData.email ? "(Ty)" : "" }} {{ member }}</span
+          >
+        </div>
+        <span
+          class="material-symbols-rounded delete"
+          *ngIf="isMenageGroupMembers && member !== userData.email"
+          (click)="onRemoveMember(member, i)"
+        >
+          cancel
+        </span>
+      </div>
+      <div
+        class="group-members"
+        *ngFor="let member of newMembers; let i = index"
+      >
+        <div class="member">
+          <span class="material-symbols-rounded icon"> person </span>
+          <span class="user">{{ member }}</span>
+        </div>
+        <span
+          class="material-symbols-rounded delete"
+          *ngIf="isMenageGroupMembers"
+          (click)="onRemoveMemberBeforeSend(member)"
+        >
+          cancel
+        </span>
+      </div>
+      <div class="add-member" *ngIf="isMenageGroupMembers">
+        <label for="add-member">
+          <input
+            type="email"
+            name="emai"
+            id="add-member"
+            class="add-input"
+            [ngClass]="{
+              'invalid-email': invalidMemberInput && addMemberInputValue !== ''
+            }"
+            [(ngModel)]="addMemberInputValue"
+          />
+          <span class="placeholder" *ngIf="addMemberInputValue === ''">
+            <span class="material-symbols-rounded icon"> person </span>
+            E-mail
+          </span>
+        </label>
+        <span
+          class="material-symbols-rounded add"
+          (click)="onCheckIfMemberExistAndAdd(addMemberInputValue)"
+        >
+          add_circle
+        </span>
+      </div>
+      <p class="error-mess" [ngClass]="{ 'err-active': isInvalidMail }">
+        {{ errorMess }}
+      </p>
+      <input
+        type="button"
+        value="Zapisz"
+        class="save"
+        *ngIf="isMenageGroupMembers"
+        (click)="onSendChangesToServer()"
+      />
+    </div>
+  </section>
+</div>
+<app-group-delete
+  *ngIf="groupDeletePopup"
+  [groupId]="groupId"
+  [groupName]="groupName"
+  (groupDeletePopup)="onToggleGroupDeleteConfirmation()"
+></app-group-delete>

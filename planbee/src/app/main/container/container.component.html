@@ -1,0 +1,18 @@
+<app-background></app-background>
+<section class="todo-template">
+  <h3>{{ categoryName }}</h3>
+  <div class="items-container">
+    <div class="add-new item" [routerLink]="['/' + categoryName, '']">
+      <span class="title">Utwórz nowe {{ categoryName }}</span>
+      <span class="material-symbols-outlined"> note_add </span>
+    </div>
+    <div
+      class="item"
+      *ngFor="let note of note.reverse()"
+      [routerLink]="['/' + categoryName, note._id]"
+    >
+      <span class="title">{{ note.title }}</span>
+      <span class="content" [innerHTML]="note.content"></span>
+    </div>
+  </div>
+</section>

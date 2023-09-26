@@ -1,0 +1,14 @@
+<div class="alert-bgc">
+  <div class="alert-container">
+    <p class="description">Czy na pewno chcesz usunąć grupę {{ groupName }}?</p>
+    <p>Spowoduje to usunięcie grupy na stałe bez moliwości przywrócenia jej.</p>
+    <div class="buttons">
+      <button class="delete" (click)="onDeleteGroup()">
+        <span class="material-symbols-rounded"> cancel </span>Usuń
+      </button>
+      <button class="reject" (click)="onCancelDelete()">
+        <span class="material-symbols-rounded"> check_circle </span>Zostaw
+      </button>
+    </div>
+  </div>
+</div>

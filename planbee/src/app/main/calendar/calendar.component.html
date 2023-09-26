@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="tasks">
+    <h3>{{ category }}</h3>
+    <p>{{ sortedEvents ? sortedEvents.length : 0 }} wydarzeń</p>
+    <hr />
+    <div class="tasks-container">
+      <div
+        class="task"
+        *ngFor="let event of sortedEvents"
+        [ngClass]="event.eventClass"
+        (click)="handleEventClickList(event)"
+      >
+        <div class="date">
+          <p>
+            {{ event.start | date : "EEEE, dd.MM.yyyy" : "" : userLocale }} |
+            <ng-container *ngIf="!event.allDay"
+              >{{ event.start | date : "HH:mm" }} -
+              {{ event.end | date : "HH:mm" }}</ng-container
+            >
+            <ng-container *ngIf="event.allDay">Cały dzień</ng-container>
+          </p>
+        </div>
+        <p class="title">{{ event.title }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="calendar">
+    <app-background></app-background>
+    <div class="calendar-container">
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+  </div>
+</div>
+<div class="popup-bgc" [ngClass]="{ 'hide-popup': !popupVisible }">
+  <div class="popup">
+    <span
+      class="material-symbols-outlined close"
+      tabindex="0"
+      (click)="togglePopup()"
+      (keydown.enter)="togglePopup()"
+      (keydown.space)="togglePopup()"
+    >
+      cancel
+    </span>
+    <h3>{{ editing ? "Edytuj wydarzenie" : "Nowe wydarzenie" }}</h3>
+    <input type="text" placeholder="Nazwa" [(ngModel)]="title" />
+    <input type="text" placeholder="Lokalizacja" [(ngModel)]="localization" />
+    <div class="date">
+      <div class="date-holder">
+        <p>Cały dzień</p>
+        <mat-slide-toggle [(ngModel)]="isAllDay"></mat-slide-toggle>
+      </div>
+      <div class="date-holder">
+        <p>Początek</p>
+        <div class="date-holder-date">
+          <input
+            type="date"
+            [disabled]="isAllDay"
+            [(ngModel)]="startDate"
+            (ngModelChange)="hendleChangeDate()"
+          />
+          <input type="time" [disabled]="isAllDay" [(ngModel)]="startHour" />
+        </div>
+      </div>
+      <div class="date-holder">
+        <p>Koniec</p>
+        <div class="date-holder-date">
+          <input
+            type="date"
+            [disabled]="isAllDay"
+            [(ngModel)]="endDate"
+            (ngModelChange)="hendleChangeDate()"
+          />
+          <input type="time" [disabled]="isAllDay" [(ngModel)]="endHour" />
+        </div>
+      </div>
+    </div>
+    <textarea
+      cols="35"
+      rows="3"
+      class="description"
+      placeholder="Opis"
+      [(ngModel)]="description"
+    ></textarea>
+    <div class="colors">
+      <span>Wybierz kolor dla wydarzenia</span>
+      <div class="color">
+        <div class="selected-color" (click)="onOpenSelectColor()">
+          <i
+            class="color-item"
+            [ngStyle]="{ backgroundColor: color }"
+            [ngClass]="colorClass || ''"
+          ></i>
+          <span class="material-symbols-outlined"> expand_more </span>
+        </div>
+        <div class="color-list" *ngIf="isColorOpen">
+          <i
+            (click)="onSelectColor('var(--yellow-90)', 'yellow-90')"
+            class="yellow-90 color-item"
+          ></i>
+          <i
+            (click)="onSelectColor('var(--orange-90)', 'orange-90')"
+            class="orange-90 color-item"
+          ></i>
+          <i
+            (click)="onSelectColor('var(--red-100)', 'red-100')"
+            class="red-100 color-item"
+          ></i>
+          <i
+            (click)="onSelectColor('var(--green-80)', 'green-80')"
+            class="green-80 color-item"
+          ></i>
+          <i
+            (click)="onSelectColor('var(--blue-90)', 'blue-90')"
+            class="blue-90 color-item"
+          ></i>
+          <i
+            (click)="onSelectColor('var(--purple-90)', 'purple-90')"
+            class="purple-90 color-item"
+          >
+          </i>
+        </div>
+      </div>
+    </div>
+    <div
+      class="btn-container"
+      [ngStyle]="{ 'justify-content': !editing ? 'center' : 'space-between' }"
+    >
+      <button
+        *ngIf="!editing"
+        class="add-new"
+        (click)="addNewEvent()"
+        [disabled]="!title || !startDate || !startHour || !endDate || !endHour"
+      >
+        <span class="material-symbols-outlined"> add_circle </span> Dodaj
+      </button>
+      <button *ngIf="editing" class="delete" (click)="deleteEvent()">
+        <span class="material-symbols-outlined"> cancel </span> Usuń
+      </button>
+      <button *ngIf="editing" class="save" (click)="saveEditedEvent()">
+        <span class="material-symbols-outlined"> add_circle </span>Zapisz
+      </button>
+    </div>
+  </div>
+</div>

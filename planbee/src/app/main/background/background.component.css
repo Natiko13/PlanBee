@@ -1,0 +1,79 @@
+.background {
+  position: relative;
+  min-height: 269px;
+  background-position: center;
+  background-size: cover;
+  background-color: #fff;
+}
+
+.background::before {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 85%,
+    var(--bgc-shadow) 100%
+  );
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.settings-holder {
+  position: relative;
+}
+
+.background:hover > .settings-holder .bgc-settings-btn {
+  opacity: 1;
+}
+
+.bgc-settings-btn {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  background-color: var(--yellow-btn);
+  border-radius: 100px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.bgc-settings-btn span {
+  color: var(--gray0);
+}
+
+.image-container {
+  position: absolute;
+  top: 69px;
+  right: 31px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 6px;
+  width: 533px;
+  padding: 16px;
+  background-color: var(--gray0);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1),
+    0px 4px 10px 0px rgba(0, 0, 0, 0.1), 0px 17px 17px 0px rgba(0, 0, 0, 0.09),
+    0px 39px 23px 0px rgba(0, 0, 0, 0.05), 0px 69px 28px 0px rgba(0, 0, 0, 0.01),
+    0px 108px 30px 0px rgba(0, 0, 0, 0);
+  border-radius: 8px;
+  overflow-y: scroll;
+  z-index: 999;
+}
+
+.bgi {
+  width: 120px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.current-bgi {
+  border: 2px solid var(--orange-20);
+  border-radius: 8px;
+}

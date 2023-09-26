@@ -1,0 +1,196 @@
+/* General styles */
+.register-background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--gray100);
+  background-image: url("/assets/background-image/Background_with_fill.png");
+}
+
+.register-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 646px;
+  min-height: 503px;
+  padding: 40px;
+  background-color: var(--gray0);
+  border-radius: 8px;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.05),
+    0px 6px 13px 0px rgba(0, 0, 0, 0.05), 0px 23px 23px 0px rgba(0, 0, 0, 0.04),
+    0px 52px 31px 0px rgba(0, 0, 0, 0.03), 0px 93px 37px 0px rgba(0, 0, 0, 0.01),
+    0px 145px 41px 0px rgba(0, 0, 0, 0);
+  z-index: 9;
+}
+
+.register-container h2 {
+  font-size: 28px;
+}
+
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+/* Names styles */
+
+.names {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.names .holder {
+  width: calc(50% - 6px);
+}
+
+/* Input styles */
+.holder input {
+  width: calc(100% - 16px);
+  height: 42px;
+  margin: 8px 0;
+  padding: 4px 8px;
+  background-color: var(--gray0);
+  border: 1px solid var(--gray80);
+  border-radius: 4px;
+}
+
+.holder input:focus {
+  border: 1px solid var(--yellow40);
+}
+
+.holder input:focus ~ span,
+.active {
+  transform: translate(0.25rem, -140%) scale(0.9) !important;
+  color: var(--yellow40);
+}
+
+.fake-placeholder {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  left: 4px;
+  transform: translate(0, -50%);
+  width: max-content;
+  padding: 0 4px;
+  background: linear-gradient(180deg, var(--gray0) 52%, rgba(0, 0, 0, 0) 49%);
+  color: var(--gray40);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.holder {
+  display: block;
+  height: fit-content;
+  position: relative;
+  cursor: text;
+}
+
+.checkbox-label,
+#remember-me {
+  font-size: 14px;
+  padding-left: 8px;
+  color: var(--gray40);
+  cursor: pointer !important;
+}
+.checkbox-label a {
+  color: var(--yellow30);
+  text-decoration: underline;
+}
+
+.password-info {
+  position: relative;
+  top: -4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray50);
+}
+
+/* Button styles */
+.form-btn {
+  align-self: center;
+  width: 286px;
+  height: 42px;
+  margin-top: 24px;
+  background-color: var(--yellow50);
+  color: var(--gray0);
+  font-size: 16px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+/* Register redirect styles */
+.register-redirect {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+}
+
+.register-redirect a {
+  color: var(--yellow50);
+  cursor: pointer;
+}
+.disabled {
+  background-color: var(--button-disable);
+  cursor: not-allowed;
+}
+
+mat-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.executed {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  width: 207px;
+}
+
+.success {
+  width: 140px;
+  height: 140px;
+  background-image: url("/assets/executed.svg");
+}
+
+.executed p {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.show-password {
+  position: absolute;
+  top: 50% !important;
+  right: 30px !important;
+  cursor: pointer;
+}
+
+/* Validation */
+
+.name.ng-touched.ng-invalid,
+.surname.ng-touched.ng-invalid,
+.email.ng-touched.ng-invalid,
+.password.ng-touched.ng-invalid,
+.repeated-password.ng-touched.ng-invalid,
+.invalid-field {
+  border: 1px solid var(--red-30) !important;
+  color: var(--red-30) !important;
+}
+.name.ng-touched.ng-invalid ~ .fake-placeholder,
+.surname.ng-touched.ng-invalid ~ .fake-placeholder,
+.email.ng-touched.ng-invalid ~ .fake-placeholder,
+.password.ng-touched.ng-invalid ~ .fake-placeholder,
+.repeated-password.ng-touched.ng-invalid ~ .fake-placeholder {
+  color: var(--red-30);
+}

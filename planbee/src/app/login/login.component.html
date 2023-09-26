@@ -1,0 +1,94 @@
+<div class="login-background">
+  <div class="login-container">
+    <mat-spinner *ngIf="processing"></mat-spinner>
+    <div class="executed" *ngIf="done">
+      <p class="success"></p>
+      <p>Pomyślnie zalogowano</p>
+    </div>
+    <ng-container *ngIf="!processing && !done">
+      <h2>Logowanie</h2>
+      <form (ngSubmit)="onLogin(f)" #f="ngForm">
+        <div class="form-controll">
+          <label class="email-holder">
+            <input
+              class="email-input"
+              [ngStyle]="{ 'border-color': errorInfo ? '#d0312d' : '' }"
+              type="email"
+              name="email"
+              id="email"
+              placeholder=" "
+              [(ngModel)]="emailValue"
+              [pattern]="'^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'"
+              required
+            />
+            <span
+              class="fake-placeholder"
+              [ngClass]="{ active: emailValue }"
+              [ngStyle]="{ color: errorInfo ? '#d0312d' : '' }"
+            >
+              <span class="material-symbols-outlined"> person </span>
+              E-mail
+            </span>
+          </label>
+
+          <label class="password-holder">
+            <input
+              class="password-input"
+              [ngStyle]="{ 'border-color': errorInfo ? '#d0312d' : '' }"
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              id="password"
+              placeholder=" "
+              [(ngModel)]="passwordValue"
+              required
+            />
+            <span
+              class="fake-placeholder"
+              [ngClass]="{ active: passwordValue }"
+              [ngStyle]="{ color: errorInfo ? '#d0312d' : '' }"
+            >
+              <span class="material-symbols-outlined"> lock </span>
+              Hasło
+            </span>
+            <span
+              class="material-symbols-outlined show-password"
+              style="transform: translate(0, -50%) scale(1) !important"
+              (click)="onToggleShowPassword()"
+            >
+              visibility{{ showPassword ? "" : "_off" }}
+            </span>
+          </label>
+          <div class="checkbox-con">
+            <input
+              type="checkbox"
+              name="remember-me"
+              id="remember-me"
+              [(ngModel)]="rememberMe"
+            />
+            <label class="checkbox-label" for="remember-me"
+              >Nie wylogowywuj mnie</label
+            >
+          </div>
+        </div>
+        <button
+          class="form-btn"
+          [ngClass]="{ disabled: !f.valid }"
+          type="submit"
+          [disabled]="!f.valid"
+        >
+          Zaloguj się
+        </button>
+      </form>
+      <span class="register-redirect"
+        >Nie posiadasz konta?
+        <a [routerLink]="['/register']">Dołącz teraz!</a></span
+      >
+    </ng-container>
+  </div>
+  <app-information-popup
+    [alertInfo]="errorInfo"
+    [isError]="isError"
+    [isActiveConfirmationPopup]="isActiveAlert"
+    [isPopupTop]="isPopupTop"
+  ></app-information-popup>
+</div>

@@ -1,0 +1,202 @@
+<aside class="aside" [ngClass]="{ 'hide-aside': isHide }">
+  <div class="user" (click)="onShowUserDetails()">
+    <img
+      *ngIf="userData?.profileOptions?.avatar"
+      class="user-avatar"
+      src="/assets/Avatars/{{ userData.profileOptions.avatar }}"
+      alt="userData.profileOptions.avatar"
+    />
+
+    <span class="user-nick" *ngIf="!isHideText">{{
+      userData ? userData.name : ""
+    }}</span>
+    <span class="material-symbols-rounded" *ngIf="!isHideText">
+      expand_more
+    </span>
+  </div>
+  <app-user
+    *ngIf="isUserDetailsShown"
+    (hideDetails)="onShowUserDetails()"
+    [settings]="onActiveSettings.emit.bind(onActiveSettings)"
+  ></app-user>
+  <div class="items">
+    <ul>
+      <li class="item">
+        <a [routerLink]="['/home']" routerLinkActive="active"
+          ><span class="material-symbols-outlined">home</span
+          >{{ isHideText ? "" : "Ekran główny" }}
+        </a>
+      </li>
+      <li class="item">
+        <a [routerLink]="['/Notatki']" routerLinkActive="active">
+          <span class="material-symbols-outlined">description</span
+          >{{ isHideText ? "" : "Notatki" }}
+        </a>
+      </li>
+      <li class="item">
+        <a [routerLink]="['/Zadania']" routerLinkActive="active">
+          <span class="material-symbols-outlined">list_alt</span>
+          {{ isHideText ? "" : "Zadania" }}</a
+        >
+      </li>
+      <li class="item">
+        <a [routerLink]="['/kalendarz']" routerLinkActive="active">
+          <span class="material-symbols-outlined">calendar_month</span>
+          {{ isHideText ? "" : "Kalendarz" }}</a
+        >
+      </li>
+      <ng-container *ngIf="userData && userData.notes">
+        <li
+          class="item"
+          *ngFor="let note of userData.notes.slice(2)"
+          tabindex="0"
+          (blur)="onItemBlur()"
+        >
+          <a [routerLink]="['/' + note.category]" routerLinkActive="active">
+            <ng-container *ngIf="editedTaskId === note._id">
+              <div class="edit-container">
+                <div class="edit-con-input">
+                  <span class="material-symbols-outlined">draft</span>
+                  <input
+                    type="text"
+                    maxlength="26"
+                    #taskInput
+                    class="editting-category"
+                    [(ngModel)]="updatedCategory"
+                    (blur)="onCloseEdit(note)"
+                    (keyup.enter)="onCloseEdit(note)"
+                  />
+                </div>
+                <p
+                  class="category-err"
+                  [ngClass]="{
+                    'error-info':
+                      isAddingError ||
+                      isUpdateCategoryError ||
+                      updatedCategory.length === 26
+                  }"
+                  style="color: var(--red-50); opacity: 0; display: none"
+                >
+                  {{
+                    isUpdateCategoryError
+                      ? responseError
+                      : "Maksymalna ilość znaków to 26"
+                  }}
+                </p>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="editedTaskId !== note._id">
+              <span class="material-symbols-outlined">draft</span>
+              {{ isHideText ? "" : note.category }}
+            </ng-container>
+          </a>
+          <ng-container *ngIf="!isTaskOption">
+            <span
+              *ngIf="!isHideText"
+              (click)="onEdit(note)"
+              class="material-symbols-outlined option-btn options-dots"
+            >
+              more_horiz
+            </span>
+          </ng-container>
+          <ng-container *ngIf="isTaskOption && activeNoteId === note._id">
+            <div class="on-active-option">
+              <span
+                class="material-symbols-outlined option-btn edit"
+                (click)="onEditTask(note)"
+              >
+                edit
+              </span>
+              <span
+                class="material-symbols-outlined option-btn delete"
+                (click)="onDeleteCategory(note._id)"
+              >
+                close
+              </span>
+            </div>
+          </ng-container>
+        </li>
+      </ng-container>
+      <li class="item">
+        <a *ngIf="!isActiveAdd" (click)="onAddNewCategory()">
+          <span class="material-symbols-outlined">add_circle_outline</span>
+          {{ isHideText ? "" : "Dodaj kategorię" }}
+        </a>
+        <a class="add-category" *ngIf="isActiveAdd">
+          <div class="add-category-controller">
+            <span class="material-symbols-outlined">add_circle_outline</span>
+            <input
+              [ngClass]="{ error: isAddingError }"
+              #categoryInput
+              type="text"
+              maxlength="26"
+              [(ngModel)]="newCategory"
+              (keyup.enter)="onInputSubmit()"
+            />
+            <span
+              class="material-symbols-outlined confirm-category"
+              (click)="onInputSubmit()"
+            >
+              check_circle
+            </span>
+          </div>
+          <p
+            class="category-err"
+            [ngClass]="{
+              'error-info': isAddingError || newCategory.length >= 26
+            }"
+          >
+            {{ responseError
+            }}{{
+              newCategory.length >= 26 ? "Maksymalna ilość znaków to 26" : ""
+            }}
+          </p>
+        </a>
+      </li>
+    </ul>
+    <hr />
+    <ul>
+      <li class="item" (click)="openGroup()">
+        <a>
+          <span class="material-symbols-outlined">group_add</span>
+          {{ isHideText ? "" : "Utwórz grupę" }}</a
+        >
+      </li>
+      <ng-container *ngIf="userData && userData.groups">
+        <li
+          class="item"
+          *ngFor="let groups of userData.groups.reverse()"
+          tabindex="0"
+          (blur)="onItemBlur()"
+        >
+          <a
+            [routerLink]="['/', 'group', groups.name, groups._id]"
+            routerLinkActive="active"
+          >
+            <span class="material-symbols-outlined"> groups </span>
+            {{ isHideText ? "" : groups.name }}
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+    <hr />
+    <ul>
+      <li class="item">
+        <a [routerLink]="['/kosz']" routerLinkActive="active">
+          <span class="material-symbols-outlined"> delete </span>
+          {{ isHideText ? "" : "Kosz" }}</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="arrow">
+    <span
+      class="material-symbols-outlined"
+      [ngClass]="{ 'reverse-arrow': isHide }"
+      (click)="toggleHide()"
+    >
+      expand_circle_right
+    </span>
+  </div>
+</aside>

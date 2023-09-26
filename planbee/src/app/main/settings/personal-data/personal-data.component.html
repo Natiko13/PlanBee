@@ -1,0 +1,20 @@
+<form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <label for="name">
+    <input type="text" id="name" formControlName="name" />
+    <span>Imię</span>
+  </label>
+  <label for="surname">
+    <input type="text" id="surname" formControlName="surname" />
+    <span>Nazwisko</span>
+  </label>
+  <label for="email">
+    <input type="email" id="email" formControlName="email" />
+    <span>E-mail</span>
+  </label>
+  <input
+    type="submit"
+    value="Zaktualizuj"
+    [disabled]="userForm.pristine"
+    [ngClass]="{ disabled: userForm.pristine }"
+  />
+</form>

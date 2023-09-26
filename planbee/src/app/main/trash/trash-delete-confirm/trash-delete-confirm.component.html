@@ -1,0 +1,14 @@
+<div class="alert-bgc">
+  <div class="alert-container">
+    <p class="description">Czy na pewno chcesz opróżnić kosz?</p>
+    <p>Spowoduje to stałe usunięcie plików bez moliwości ich przywrócenia.</p>
+    <div class="buttons">
+      <button class="delete" (click)="onEmptyTrash()">
+        <span class="material-symbols-rounded"> cancel </span>Opróżnij
+      </button>
+      <button class="reject" (click)="onClosePopup()">
+        <span class="material-symbols-rounded"> check_circle </span>Zostaw
+      </button>
+    </div>
+  </div>
+</div>

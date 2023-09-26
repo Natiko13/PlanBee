@@ -1,0 +1,60 @@
+<div class="settings-background">
+  <div class="info-popup" *ngIf="isActivePopup">
+    <span class="material-symbols-outlined"> check_circle </span>
+    <div class="info">
+      <span>Informacja</span>
+      <span>{{ popupMess }}</span>
+    </div>
+  </div>
+  <div class="settings-container">
+    <p>Ustawienia</p>
+    <div class="settings">
+      <div class="aside">
+        <ul class="items">
+          <li
+            class="item"
+            [ngClass]="{ active: activeSettingIndex === 1 }"
+            (click)="onSwitchSetting(1)"
+          >
+            <span class="material-symbols-rounded icon">
+              background_replace
+            </span>
+            Personalizacja
+          </li>
+          <li
+            class="item"
+            [ngClass]="{ active: activeSettingIndex === 2 }"
+            (click)="onSwitchSetting(2)"
+          >
+            <span class="material-symbols-rounded"> account_box </span>Dane
+            osobowe
+          </li>
+          <li
+            class="item"
+            [ngClass]="{ active: activeSettingIndex === 3 }"
+            (click)="onSwitchSetting(3)"
+          >
+            <span class="material-symbols-rounded icon"> password </span>
+            Zmiana hasła
+          </li>
+        </ul>
+      </div>
+      <div class="settings-data">
+        <app-theme *ngIf="activeSettingIndex === 1"></app-theme>
+        <app-personal-data
+          *ngIf="activeSettingIndex === 2"
+          (popupMess)="receiveMessage($event)"
+          (isSavedPassword)="onSavedPasswordPopup()"
+        ></app-personal-data>
+        <app-change-password
+          *ngIf="activeSettingIndex === 3"
+          (isSavedPassword)="onSavedPasswordPopup()"
+          (popupMess)="receiveMessage($event)"
+        ></app-change-password>
+      </div>
+    </div>
+    <span class="material-symbols-outlined close" (click)="onToggleSettings()">
+      cancel
+    </span>
+  </div>
+</div>

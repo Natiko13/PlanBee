@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="bin">
+    <div class="bin-con">
+      <p class="section-title spacer">
+        <span class="material-symbols-rounded"> delete </span> Kosz
+      </p>
+      <hr />
+      <div class="items">
+        <ng-container *ngIf="userData && userData.trash">
+          <div
+            class="item"
+            *ngFor="let trashCategory of userData.trash; let i = index"
+          >
+            <div
+              class="item-header spacer"
+              [ngClass]="{
+                'category-active':
+                  trashCategory.originalCategory === selectedItem.category ||
+                  toggleStates[trashCategory._id]
+              }"
+              (click)="onToggleOpen(trashCategory._id)"
+            >
+              <div class="item-category">
+                <span class="item-category"
+                  >{{ trashCategory.originalCategory }}({{
+                    trashCategory.note.length
+                  }})</span
+                >
+                <span class="material-symbols-rounded"> expand_more </span>
+              </div>
+              <span
+                class="material-symbols-rounded restore-all"
+                (click)="onRestoreAllNote(trashCategory.originalCategory)"
+              >
+                refresh
+              </span>
+            </div>
+            <div
+              class="item-elements"
+              [@openClose]="toggleStates[trashCategory._id] ? 'open' : 'closed'"
+              [style.pointer-events]="
+                toggleStates[trashCategory._id] ? 'auto' : 'none'
+              "
+            >
+              <div
+                class="item-title"
+                [ngClass]="{ 'item-active': item._id === selectedItem.id }"
+                *ngFor="let item of trashCategory.note"
+              >
+                <div (click)="onSelectItem(trashCategory, item)">
+                  <span class="title">{{ item.title }}</span>
+                  <span class="material-symbols-rounded"> chevron_right </span>
+                </div>
+                <span
+                  class="material-symbols-rounded restore-item"
+                  (click)="
+                    onRestoreNote(trashCategory.originalCategory, item._id)
+                  "
+                >
+                  refresh
+                </span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <button
+      *ngIf="userData && userData.trash"
+      class="delete-forever"
+      [ngClass]="{ disabled: userData.trash.length === 0 }"
+      (click)="onTogglePopup()"
+      [disabled]="userData.trash.length === 0"
+    >
+      <span class="material-symbols-rounded"> delete_forever </span>Opróżnij
+      kosz
+    </button>
+  </div>
+  <div class="deleted-content">
+    <app-background></app-background>
+    <div class="item-content">
+      <ng-container *ngIf="selectedItem.title !== ''"
+        ><div class="tool-bar">
+          <button
+            class="tool-bar-restore"
+            (click)="onRestoreNote(selectedItem.category, selectedItem.id)"
+          >
+            <span class="material-symbols-rounded"> refresh </span>Przywróć
+          </button>
+        </div>
+        <div class="item-content-value">
+          <span class="item-content-title">{{ selectedItem.title }}</span>
+          <span
+            class="item-content-description"
+            [innerHtml]="selectedItem.content"
+          ></span></div
+      ></ng-container>
+    </div>
+  </div>
+</div>
+<app-trash-delete-confirm
+  *ngIf="isActivePopup"
+  (isActivePopup)="onTogglePopup()"
+  (emptyTrashEvent)="handleEmptyTrash()"
+></app-trash-delete-confirm>

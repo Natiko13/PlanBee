@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="tasks">
+    <div class="padding">
+      <h3 *ngIf="!groupId || !groupName">{{ category }}</h3>
+      <h3 *ngIf="groupId || groupName">
+        {{ category === "notes" ? "Notatki" : "Zadania" }}
+      </h3>
+      <p>Ilość elementów: {{ note.length }}</p>
+      <hr />
+    </div>
+    <div class="tasks-container padding">
+      <div
+        class="new-task task"
+        (click)="onNewNote()"
+        [routerLink]="
+          groupName && groupId
+            ? ['/' + 'group/' + groupName, groupId, category, '']
+            : ['/' + category, '']
+        "
+      >
+        <span class="material-symbols-outlined"> note_add </span>
+      </div>
+      <div
+        class="task added-task"
+        *ngFor="let note of note.reverse()"
+        (click)="onNoteClick(note)"
+        [routerLink]="
+          groupName && groupId
+            ? ['/' + 'group/' + groupName, groupId, category, note._id]
+            : ['/' + category, note._id]
+        "
+        routerLinkActive="active-task"
+      >
+        <div class="delete-task" (click)="onDeleteNoteAside(note._id)">
+          <span class="material-symbols-outlined"> close </span>
+        </div>
+        <div class="content-container">
+          <h4>{{ note.title }}</h4>
+          <span [innerHTML]="note.content"></span>
+        </div>
+        <p *ngIf="note.addedTime">
+          {{ getTimeDifferenceFromNow(note.addedTime!) }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="edit-task">
+    <app-background></app-background>
+    <div class="task-to-edit">
+      <div class="text-formater">
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" class="toolbar">
+        </ngx-editor-menu>
+        <div class="buttons-con">
+          <button
+            class="delete buttons"
+            (click)="onDeleteNote()"
+            [disabled]="isNewNote"
+          >
+            <span class="material-symbols-outlined"> delete </span>
+            Usuń
+          </button>
+          <button
+            class="save buttons"
+            (click)="saveOrUpdateNote()"
+            *ngIf="!isSaved"
+          >
+            <span class="material-symbols-outlined"> save </span
+            >{{ isNewNote ? "Dodaj" : "Zapisz" }}
+          </button>
+          <button class="buttons saved" *ngIf="isSaved">
+            <span class="material-symbols-outlined"> check_circle </span>
+            Zapisano
+          </button>
+        </div>
+      </div>
+      <div class="typing-place">
+        <input
+          type="text"
+          [(ngModel)]="title"
+          placeholder="Tytuł"
+          [value]="title === 'new' ? '' : title"
+        />
+        <ngx-editor
+          [editor]="editor"
+          [(ngModel)]="editorContent"
+          [disabled]="false"
+          [placeholder]="'Zacznij pisać...'"
+        ></ngx-editor>
+      </div>
+    </div>
+    <app-information-popup
+      [isError]="isError"
+      [isDelete]="isDelete"
+      [isSaved]="isSaved"
+      [category]="category"
+      [isActiveConfirmationPopup]="isActiveConfirmationPopup"
+      [alertInfo]="alertInfo"
+    ></app-information-popup>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="popup-bgc">
+  <div class="group-con">
+    <span class="title"> Utwórz grupę </span>
+    <span class="description">Zaproś do współpracy</span>
+    <form
+      class="form"
+      (ngSubmit)="onSubmit()"
+      [formGroup]="group"
+      (keydown.enter)="$event.preventDefault()"
+    >
+      <div class="inputs-con" formArrayName="emails">
+        <div
+          *ngFor="let email of emails.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <label
+            class="email-holder"
+            [ngStyle]="{
+              color: invalidEmails.includes(email.value.email)
+                ? 'var(--red-50)'
+                : ''
+            }"
+          >
+          <input
+          #emailInput
+          [ngClass]="{ error: invalidEmails.includes(email.value.email) }"
+          class="email-input"
+          type="email"
+          formControlName="email"
+          placeholder=" "
+          [pattern]="'^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'"
+          (blur)="i === emails.length - 1 && email.valid ? addEmail() : null"
+          (keydown.enter)="i === emails.length - 1 && email.valid ? addEmail() : null"
+        />
+        
+            <span
+              class="fake-placeholder"
+              [ngStyle]="{
+                color: invalidEmails.includes(email.value.email)
+                  ? 'var(--red-50)'
+                  : ''
+              }"
+            >
+              <span class="material-symbols-outlined"> person </span>
+              E-mail
+            </span>
+            <p
+              class="invalid-email-info"
+              *ngIf="invalidEmails.includes(email.value.email)"
+            >
+              E-mail nie istnieje
+            </p>
+          </label>
+        </div>
+      </div>
+
+      <input
+        type="submit"
+        value="Wyślij zaproszenie"
+        [ngClass]="{ disabled: !group.valid }"
+        [disabled]="!group.valid"
+      />
+    </form>
+
+    <span class="material-symbols-outlined close" (click)="onClose()">
+      cancel
+    </span>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="avatar settings-item">
+  <span>Zmień awatar: </span>
+  <div class="current-avatar">
+    <img
+      *ngIf="userData?.profileOptions?.avatar"
+      class="current-avatar-img"
+      width="42px"
+      height="42px"
+      src="/assets/Avatars/{{ userData.profileOptions.avatar }}"
+      alt="{{ userData.profileOptions.avatar }}"
+      (click)="onActiveSetting('avatar')"
+      (blur)="onBlur('avatar')"
+      loading="lazy"
+    />
+    <div
+      *ngIf="
+        userData && userData.profileOptions && userData.profileOptions.avatar
+      "
+      class="image-container avatar-con"
+      [@openCloseAvatar]="isOpenAvatarSettings ? 'open' : 'closed'"
+    >
+      <img
+        *ngFor="let avatar of avatarsArray"
+        (click)="patchBackground(avatar, 1)"
+        width="42px"
+        height="42px"
+        src="/assets/Avatars/{{ avatar }}"
+        alt="{{ avatar }}"
+        class="avatar-img"
+        [ngClass]="{
+          'current-small-avatar': avatar === userData.profileOptions.avatar
+        }"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>
+<div class="background settings-item">
+  <span>Obraz w tle: </span>
+  <img
+    *ngIf="userData"
+    class="current-bgi"
+    src="/assets/header-img/{{ userData.profileOptions.background }}"
+    alt="userData.profileOptions.background"
+    (click)="onActiveSetting('background')"
+    tabindex="0"
+    loading="lazy"
+  />
+  <div
+    *ngIf="
+      userData && userData.profileOptions && userData.profileOptions.background
+    "
+    class="image-container img-con"
+    [@openClose]="isOpenBackgroundSettings ? 'open' : 'closed'"
+  >
+    <img
+      *ngFor="let bg of bgArray"
+      (click)="patchBackground(bg, 2)"
+      src="/assets/header-img/{{ bg }}"
+      alt="{{ bg }}"
+      class="bgi"
+      [ngClass]="{
+        'current-small-bgi': bg === userData.profileOptions.background
+      }"
+      tabindex="0"
+      loading="lazy"
+    />
+  </div>
+</div>
+<div class="theme">
+  <label for="light-theme" class="theme-label">
+    <div class="input-theme">
+      <input
+        type="radio"
+        name="theme"
+        id="light-theme"
+        (click)="patchBackground('light', 3)"
+        [checked]="userTheme === 'light'"
+      />
+      <span>Tryb jasny</span>
+    </div>
+    <img src="/assets/header-img/bg1.png" alt="light-theme" class="theme-img" />
+  </label>
+  <label for="dark-theme" class="theme-label">
+    <div class="input-theme">
+      <input
+        type="radio"
+        name="theme"
+        id="dark-theme"
+        (click)="patchBackground('dark', 3)"
+        [checked]="userTheme === 'dark'"
+      />
+      <span>Tryb ciemny</span>
+    </div>
+    <img src="/assets/header-img/bg1.png" alt="dark-theme" class="theme-img" />
+  </label>
+</div>

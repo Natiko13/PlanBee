@@ -1,0 +1,38 @@
+<div class="calendar-con">
+  <div class="calendar-header">
+    <button (click)="onPreviousMonth()">
+      <span class="material-symbols-outlined previous"> change_history </span>
+    </button>
+    <span>
+      {{ calendarCreator.getMonthName(monthNumber) }} &nbsp; {{ year }}
+    </span>
+    <button (click)="onNextMonth()">
+      <span class="material-symbols-outlined next"> change_history </span>
+    </button>
+  </div>
+  <div class="calendar">
+    <span
+      *ngFor="let weekDay of weekDaysName"
+      class="day"
+      [ngClass]="{ weekend: weekDay === 'Sb' || weekDay === 'Nd' }"
+    >
+      {{ weekDay }}
+    </span>
+
+    <span
+      *ngFor="let day of monthDays"
+      class="day"
+      [ngClass]="{
+        weekend: day.weekDayNumber === 6 || day.weekDayNumber === 7,
+        'current-day': isCurrentDay(day),
+        'previous-month-days': !day.currentMonth
+      }"
+    >
+      {{ day.number }}
+    </span>
+
+    <div class="hover-redirect" [routerLink]="['/kalendarz']">
+      <span class="material-symbols-rounded"> add </span>
+    </div>
+  </div>
+</div>

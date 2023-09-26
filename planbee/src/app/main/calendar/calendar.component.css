@@ -1,0 +1,320 @@
+.container {
+  display: flex;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  min-width: 318px;
+  height: 100svh;
+  padding: 16px;
+  background-color: var(--gray90);
+  overflow-y: hidden;
+}
+
+hr {
+  width: 100%;
+  margin: 0;
+  border-color: var(--gray20);
+}
+
+.tasks h3 {
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.28px;
+  line-height: 21px;
+  margin-bottom: 6px;
+}
+.tasks p {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.28px;
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 24px;
+  overflow-y: auto;
+}
+
+.tasks-container span {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.task {
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.date p {
+  font-weight: 600;
+  color: var(--gray10);
+}
+.task p {
+  text-transform: capitalize;
+  font-size: 13px;
+  color: var(--gray10);
+}
+
+.task p {
+  color: var(--gray-10);
+}
+
+.add-new-event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  background-color: #fff;
+  border: 1px solid var(--yellow50);
+  border-radius: 100px;
+  color: var(--yellow50);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.add-new-event .material-symbols-outlined {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  font-size: 24px;
+  font-weight: 400;
+}
+/* Etit tasks style */
+
+.calendar {
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+.background {
+  height: 216px;
+}
+
+.calendar-container {
+  padding: 0 16px;
+  background-color: var(--gray100);
+}
+
+full-calendar {
+  position: relative;
+  top: -20px;
+  margin: 0 auto 0 auto;
+  max-width: 1252px;
+}
+
+.popup-bgc {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transform: translate(50%, -50%);
+  padding: 40px;
+  background-color: var(--gray0);
+  border: 1px solid var(--gray80);
+  border-radius: 8px;
+}
+
+.popup h3 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.btn-container {
+  display: flex;
+  gap: 8px;
+}
+
+.popup button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 162px;
+  height: 42px;
+  font-size: 16px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.popup button .material-symbols-outlined {
+  margin-right: 4px;
+  font-weight: 400;
+  color: var(--gray0);
+}
+
+.add-new {
+  width: 262px !important;
+  color: var(--gray0);
+  background-color: var(--yellow50);
+}
+
+.save {
+  background-color: var(--yellow50);
+  color: var(--gray0);
+}
+.delete {
+  background-color: var(--gray0);
+  border: 1px solid var(--yellow50);
+  color: var(--yellow50);
+}
+
+.delete .material-symbols-outlined {
+  color: var(--yellow50) !important;
+}
+
+.popup input[type="text"],
+.popup textarea {
+  padding: 12px 8px;
+  background-color: var(--gray100);
+  border: 1px solid var(--gray80);
+  border-radius: 4px;
+  resize: none;
+}
+
+.date-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0;
+}
+
+.date-holder p {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.date-holder input {
+  background-color: var(--gray80);
+  font-size: 12px;
+  padding: 4px;
+  border-radius: 6px;
+}
+.date-holder input:first-child {
+  width: 115px;
+  margin-right: 4px;
+}
+
+.date-holder input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+  display: none;
+}
+
+/* color picker */
+.colors {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  font-size: 14px;
+}
+
+.color {
+  position: relative;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background-color: var(--gray80);
+  cursor: pointer;
+}
+
+.selected-color .material-symbols-outlined {
+  background-color: transparent !important;
+  border: none;
+  color: var(--yellow50);
+}
+
+.selected-color {
+  display: flex;
+  align-items: center;
+}
+
+.color-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.color-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+  gap: 4px;
+  width: 64px;
+  height: 84px;
+  padding: 8px;
+  background-color: var(--gray0);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 2px 0px rgba(0, 0, 0, 0.09),
+    0px 4px 2px 0px rgba(0, 0, 0, 0.05), 0px 7px 3px 0px rgba(0, 0, 0, 0.01),
+    0px 11px 3px 0px rgba(0, 0, 0, 0);
+  border: 1px solid var(--gray80);
+  border-radius: 8px;
+  cursor: default;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.hide-popup {
+  display: none;
+}
+
+/* colors list */
+
+.yellow-90 {
+  background-color: var(--yellow-90);
+  border: 1px solid var(--yellow-80);
+  color: var(--yellow-80);
+}
+.orange-90 {
+  background-color: var(--orange-90);
+  border: 1px solid var(--orange-80);
+  color: var(--orange-80);
+}
+.red-100 {
+  background-color: var(--red-100);
+  border: 1px solid var(--red-90);
+  color: var(--red-90);
+}
+.green-80 {
+  background-color: var(--green-80);
+  border: 1px solid var(--green-70);
+  color: var(--green-70);
+}
+.blue-90 {
+  background-color: var(--blue-90);
+  border: 1px solid var(--blue-80);
+  color: var(--blue-80);
+}
+.purple-90 {
+  background-color: var(--purple-90);
+  border: 1px solid var(--purple-80);
+  color: var(--purple-80);
+}

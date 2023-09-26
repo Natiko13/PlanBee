@@ -1,0 +1,104 @@
+.calendar-con {
+  width: 301px;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 2px 0px rgba(0, 0, 0, 0.09),
+    0px 4px 2px 0px rgba(0, 0, 0, 0.05), 0px 7px 3px 0px rgba(0, 0, 0, 0.01),
+    0px 11px 3px 0px rgba(0, 0, 0, 0);
+  border-radius: 8px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 34px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: var(--yellow90);
+  border-radius: 8px 8px 0 0;
+}
+
+.calendar-header button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.calendar-header button .previous {
+  transform: rotateZ(270deg);
+  margin-left: 45px;
+}
+.calendar-header button .next {
+  transform: rotateZ(90deg);
+  margin-right: 45px;
+}
+
+.calendar {
+  position: relative;
+  width: 100%;
+  height: 219px;
+  background-color: var(--gray0);
+  border-radius: 0 0 8px 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.calendar:hover .hover-redirect {
+  opacity: 1;
+}
+
+.hover-redirect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 8px 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.hover-redirect .material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  background-color: var(--gray0);
+  color: var(--yellow50);
+  font-size: 70px;
+  border: 2px solid var(--yellow50);
+  border-radius: 100%;
+}
+
+.day {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin: 5px 10px 4px 10px;
+  text-align: center;
+}
+
+.current-day {
+  background-color: var(--orange30);
+  color: var(--gray0) !important;
+  border-radius: 4px;
+}
+
+.weekend {
+  color: var(--orange30);
+}
+
+.calendar-header .material-symbols-outlined {
+  font-size: 13px;
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+.previous-month-days {
+  opacity: 0.2;
+}

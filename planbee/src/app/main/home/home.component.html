@@ -1,0 +1,85 @@
+<app-background></app-background>
+<div class="frames-con" #container>
+  <div class="first-frame">
+    <div class="frames">
+      <h3>{{ category && category.length > 0 ? category[0].category : "" }}</h3>
+      <div class="items-container">
+        <div class="add-new item" [routerLink]="['/Notatki', '']">
+          <span class="title">Utwórz nowe notatki</span>
+          <span class="material-symbols-outlined">note_add</span>
+        </div>
+        <ng-container *ngIf="category.length > 0">
+          <div
+            class="item"
+            *ngFor="let note of category[0].note.reverse()"
+            [routerLink]="['/Notatki', note._id]"
+            [state]="{ id: note._id }"
+          >
+            <span class="title">{{ note.title }}</span>
+            <span class="content" [innerHTML]="note.content"></span>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <app-mini-calendar></app-mini-calendar>
+  </div>
+  <div class="frames">
+    <h3>{{ category && category.length > 0 ? category[1].category : "" }}</h3>
+    <div class="items-container">
+      <div class="add-new item" [routerLink]="['/Zadania', '']">
+        <span class="title">Utwórz nowe zadania</span>
+        <span class="material-symbols-outlined">assignment_add</span>
+      </div>
+      <ng-container *ngIf="category.length > 0">
+        <div
+          class="item"
+          *ngFor="let note of category[1].note.reverse()"
+          [routerLink]="['/Zadania', note._id]"
+          [state]="{ id: note._id }"
+        >
+          <span class="title">{{ note.title }}</span>
+          <span class="content" [innerHTML]="note.content"></span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="frames" *ngFor="let category of category.slice(2); let i = index">
+    <h3>{{ category.category }}</h3>
+    <div class="items-container">
+      <div class="add-new item" [routerLink]="['/', category.category, '']">
+        <span class="title">Utwórz nowe {{ category.category }}</span>
+        <span class="material-symbols-outlined">note_add</span>
+      </div>
+      <ng-container *ngIf="category.note && category.note.length > 0">
+        <div
+          class="item"
+          *ngFor="let noteItem of category.note.reverse()"
+          [routerLink]="['/', category.category, noteItem._id]"
+        >
+          <span class="title">{{ noteItem.title }}</span>
+          <span class="content" [innerHTML]="noteItem.content"></span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="frames">
+    <h3>Grupy</h3>
+    <div class="items-container">
+      <div class="add-new item">
+        <span class="title">Utwórz nową grupę</span>
+        <span class="material-symbols-outlined">group_add</span>
+      </div>
+      <ng-container *ngIf="groups && groups.length > 0">
+        <div
+          class="item groups"
+          *ngFor="let groups of groups"
+          [routerLink]="['/', 'group', groups.name, groups._id]"
+        >
+          <span class="title">{{ groups.name }}</span>
+          <span class="material-symbols-rounded group"> groups </span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
